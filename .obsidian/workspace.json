@@ -1,0 +1,236 @@
+{
+  "main": {
+    "id": "63ca5c142599e95c",
+    "type": "split",
+    "children": [
+      {
+        "id": "cf6dd400881a3802",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c00229e90d48695d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "projects/dl/README.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "README"
+            }
+          }
+        ]
+      },
+      {
+        "id": "5fe862230a24d64b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "92fc476d91130c4e",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "关系图谱"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "0a463cb985144e01",
+    "type": "split",
+    "children": [
+      {
+        "id": "88bb727ae4633ebf",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0a352504e98d2e1d",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "9e74e28e6f7a7e40",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "15b3de4730b6a5fe",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "2261ece77a22a718",
+    "type": "split",
+    "children": [
+      {
+        "id": "b2bdd49f13727e6f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "763d046e961f44e3",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "欢迎.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "欢迎 的反向链接列表"
+            }
+          },
+          {
+            "id": "3a65a3ceedd1ca81",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "欢迎.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "欢迎 的出链列表"
+            }
+          },
+          {
+            "id": "19dc30d611632527",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "05af8b09e2f71892",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "caa2e69cbf18760a",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "欢迎.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "欢迎 的大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "markdown-importer:打开 Markdown 格式转换器": false,
+      "obsidian-git:Open Git source control": false,
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false
+    }
+  },
+  "active": "92fc476d91130c4e",
+  "lastOpenFiles": [
+    "projects/dl/README.md",
+    "hermes/tasks/dl-008.md",
+    "hermes/tasks/dl-007.md",
+    "hermes/tasks/dl-006.md",
+    "hermes/tasks/dl-005.md",
+    "hermes/tasks/dl-004.md",
+    "hermes/tasks/dl-003.md",
+    "hermes/tasks/dl-002.md",
+    "hermes/tasks/dl-001.md",
+    "projects/final-report/README.md",
+    "欢迎.md",
+    "projects/dl",
+    "hermes/hermes-core-duty.md",
+    "hermes/tasks/fr-001.md",
+    "创建链接.md",
+    "projects/final-report/hermes/tasks/fr-001.md",
+    "projects/final-report/hermes/tasks",
+    "projects/final-report/hermes",
+    "projects/final-report",
+    "knowledge/research",
+    "literature",
+    "templates",
+    "experiments",
+    "knowledge/coding",
+    "AGENTS.md",
+    "hermes/project-status.md",
+    "hermes/queue.md",
+    "hermes/decisions.md",
+    "projects"
+  ]
+}
