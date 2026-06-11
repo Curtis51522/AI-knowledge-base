@@ -230,6 +230,8 @@
   },
   "active": "a98294dd91b26c1c",
   "lastOpenFiles": [
+    "_write_task.py",
+    "_write_readme.py",
     "projects/dl/README.md",
     "hermes/project-status.md",
     "projects/final-report/README.md",
@@ -255,7 +257,6 @@
     "literature/Applied robotics/Trajectory Planning for Intelligent Robotic and Mechatronic Systems.md",
     "literature/Applied robotics/Research on Path Planning Technology of Industrial Robot.md",
     "literature/Applied robotics/Reinforcement Learning of a Six-DOF Industrial Manipulator for Pick-and-Place Application Using Efficient Control in Warehouse Management.md",
-    "literature/Applied robotics/Path planning of industrial robots based on the adaptive field cooperative sampling algorithm.md",
     "literature/AI hallucination/Trusting Your Evidence Hallucinate Less with Context-aware Decoding.pdf",
     "literature/AI hallucination/SelfCheckGPT Zero-Resource Black-Box Hallucination Detection for Generative Large Language Models.pdf",
     "literature/AI hallucination/Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena.pdf",
@@ -264,7 +265,6 @@
     "literature/AI hallucination/Drowzee Metamorphic Testing for Fact-Conflicting Hallucination Detection in Large Language Models.pdf",
     "literature/AI hallucination/A Multitask, Multilingual, Multimodal Evaluation of ChatGPT on Reasoning, Hallucination, and Interactivity.pdf",
     "literature/AI hallucination/The Internal State of an LLM Knows When It's Lying.pdf",
-    "literature/AI hallucination/Right for Right Reasons Large Language Models for Verifiable Commonsense Knowledge Graph Question Answering.pdf",
-    "literature/AI hallucination/Multiple_Choice_Questions_Reasoning_Makes_Large_Language_Models_LLMs_More_Self-Confident_specially_When_They_are_Wrong.pdf"
+    "literature/AI hallucination/Right for Right Reasons Large Language Models for Verifiable Commonsense Knowledge Graph Question Answering.pdf"
   ]
 }

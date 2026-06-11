@@ -1,73 +1,95 @@
-# 烘焙 AI 系统 —— 最终报告
+# Bakery AI System - Final Report
 
-## 项目目标
-为马来西亚吉隆坡一家中型烘焙咖啡店设计并实现一套多智能体 AI 运营系统。系统集成了计算机视觉、需求预测、排班调度、POS 收银（含套餐推荐），以及用于实时决策支持的多智能体 AI 大脑。
+## Project Goal
+Design and implement a multi-agent AI operations system for a medium-sized bakery-cafe in Kuala Lumpur, Malaysia. The system integrates computer vision, demand forecasting, shift scheduling, POS checkout (with combo recommendations), and a multi-agent AI Brain for real-time decision support.
 
-**规模：** 6 种面包产品、6 种咖啡饮品、10 名员工、2 台烤箱、2 个收银台。休息日：周一。
-
----
-## 当前阶段：离线现场测试与迭代
-系统已完整搭建并在本地运行。下一步：带到面包店进行真实环境测试，收集店主和员工反馈，根据实际运营需求迭代。
+**Scale:** 6 bakery products, 6 coffee drinks, 10 employees, 2 ovens, 2 checkout counters (main bakery counter + secondary coffee counter, barista doubles as cashier). Rest day: Monday.
 
 ---
-## 当前进度（已完成）
 
-### S1 —— 视觉识别（YOLO + OpenCV）
-- YOLOv8n 训练完成，支持 6 种产品检测
-- OpenCV 托盘颜色分类（绿色 = 常规区、橙色 = 折扣区）
-- 收银时 FIFO 库存扣减
-
-### S2 —— 需求预测（XGBoost）
-- 6 个逐产品 XGBoost 分位数回归模型
-- 7 天预测，含低/中/高置信区间
-- 通过 VisualCrossing API 集成天气数据
-
-### S3 —— 排班调度（CP-SAT）
-- OR-Tools CP-SAT 求解器，按需求自动配置人力
-- 双角色支持、病假自动替换、技能交换
-- 过去日期锁定 + KPI 快照持久化
-
-### S4 —— POS 前端 + 套餐引擎（BFF 架构）
-- 响应式 Web POS，JWT 认证（员工/经理角色）
-- 五维套餐评分，Day-1 商品动态折扣
-- 收银含 FIFO 扣减 + 小票，LLM 销售话术（DeepSeek）
-
-### S5 —— AI 大脑（多智能体引擎）
-- DistilBERT 意图分类器（8 种意图），6 个程序化智能体
-- MIP Pareto 方案生成 + DeepSeek LLM 方案选择与综合
-- 系统告警：每 5 分钟后台监控（库存、预测、排班、趋势）
+## Current Stage: Pre-Deployment Polish & Demo Preparation
+System is fully built and running locally. Next step: bring to the bakery for real-environment testing, collect owner and staff feedback, iterate based on actual operational needs.
 
 ---
-## 已知限制（现场测试前）
 
-| # | 问题 | 影响 |
-|---|------|------|
-| 1 | **无真实销售数据** | 全部基于合成种子数据训练；预测准确性未验证 |
-| 2 | **YOLO 未使用真实摄像头测试** | 仅使用静态测试图片；真实光照、角度、遮挡情况未知 |
-| 3 | **收入 = RM0** | 利润智能体在录到真实交易前始终显示负毛利 |
-| 4 | **两个服务器需手动启动** | S5（:8001）+ 主服务器（:8002）需分别启动 |
-| 5 | **MILP 偶尔无解** | 优雅回退到 LP + 取整方案可行但非最优 |
-| 6 | **未集成烤箱/厨房** | 烤箱排班尚未对接真实设备 |
+## Progress (Completed)
+
+### S1 - Visual Recognition (YOLO)
+- YOLOv8n trained, supports 6 product detection
+- Checkout with FIFO inventory deduction
+- Fresh Batch Inflow for new production scanning
+- HITL (Human-in-the-Loop) correction log
+
+### S2 - Demand Forecasting (XGBoost)
+- Per-product XGBoost quantile regression models (6 products)
+- 7-day forecast with low/mid/high confidence intervals
+- Weather data integration via VisualCrossing API
+- Auto-refresh every 30 minutes
+
+### S3 - Shift Scheduling (OR-Tools CP-SAT)
+- OR-Tools CP-SAT solver, demand-driven auto-staffing
+- Dual-role support, sick leave auto-replacement, shift swaps
+- Past-date locking + KPI snapshot persistence
+- Employee coverage statistics & fairness metrics
+
+### S4 - POS Frontend + Combo Engine (BFF Architecture)
+- Responsive Web POS, JWT auth (Staff/Manager roles)
+- Five-dimensional combo scoring, Day-1 dynamic discount
+- Post-checkout FIFO deduction + receipt, LLM sales script
+- EN/BM bilingual support throughout all UI
+- Smart Top-3 bundle recommendations
+- AI-generated sales script for cashiers
+
+### S5 - AI Brain (Multi-Agent Engine)
+- DistilBERT intent classifier (8 intents), 6 programmatic agents
+- MIP Pareto plan generation + LLM plan selection & synthesis
+- System alerts: background monitoring every 5 minutes (inventory, forecast, schedule, trends)
+- Supports English, Bahasa Malaysia, and mixed EN-BM input
+
+### Recent UI/UX Improvements (2026-06-11)
+- Full EN/BM language toggle with ~120 translation keys
+- Freshness switched to midnight-based (was 24-hour)
+- Dynamic discounts with 20% floor
+- Cart-only combo pairing logic
+- Savings-based Top-3 sorting for coffee-only scenarios
+- Fixed showPanel race condition (await redirect bug)
+- Fixed ? to checkmark character in Plan Options
+- Removed all Day-2/Near-Expired residual code (only Fresh/Day-1 remain)
+- Demo script written for merchant presentation
 
 ---
-## 下一步计划
 
-### 现场测试准备
-- [ ] 准备笔记本电脑/部署环境用于现场测试
-- [ ] 用真实初始库存数据填充数据库
-- [ ] 携带 USB 摄像头并在收银台测试 YOLO
-- [ ] 准备测试脚本：进货 → 预测 → 排班 → 收银 → AI 查询
+## Known Limitations (Before Field Test)
 
-### 现场测试期间
-- [ ] 收集 1-2 周真实销售数据
-- [ ] 在真实光照和托盘条件下测试 YOLO 准确率
-- [ ] 收集员工对 POS 可用性的反馈
-- [ ] 收集店主对 AI 大脑建议（烘焙计划、促销、排班）的反馈
-- [ ] 记录所有 Bug 和 UX 摩擦点
+| # | Issue | Impact |
+|---|-------|--------|
+| 1 | **No real sales data** | All models trained on synthetic seed data; forecast accuracy unverified |
+| 2 | **YOLO not tested with real camera** | Only tested with static images; real lighting, angles, occlusion unknown |
+| 3 | **Revenue = RM0** | Profit agent always shows negative margin until real transactions are recorded |
+| 4 | **Two servers require manual start** | S5 (:8001) and main server (:8002) must be started separately |
+| 5 | **MILP occasionally infeasible** | Graceful fallback to LP + rounding; plan is feasible but not optimal |
+| 6 | **Not integrated with oven/kitchen** | Oven scheduling not yet connected to real equipment |
 
-### 现场测试后
-- [ ] 基于真实销售数据重新训练 XGBoost 模型
-- [ ] 如有需要，用真实面包店图片微调 YOLO
-- [ ] 根据实际人员需求调整 S3 约束模型
-- [ ] 根据店主偏好迭代套餐评分权重
-- [ ] 完善文档以提交最终报告
+---
+
+## Next Steps
+
+### Field Test Preparation
+- [ ] Prepare laptop/deployment environment for on-site testing
+- [ ] Seed database with realistic initial inventory data
+- [ ] Bring USB camera and test YOLO at checkout counter
+- [ ] Prepare test script: inflow -> forecast -> schedule -> checkout -> AI query
+
+### During Field Test
+- [ ] Collect 1-2 weeks of real sales data
+- [ ] Test YOLO accuracy under real lighting and tray conditions
+- [ ] Gather staff feedback on POS usability
+- [ ] Gather owner feedback on AI Brain recommendations (baking plan, promo, schedule)
+- [ ] Log all bugs and UX friction points
+
+### Post Field Test
+- [ ] Retrain XGBoost models on real sales data
+- [ ] Fine-tune YOLO with real bakery images if needed
+- [ ] Adjust S3 constraint model based on actual staffing needs
+- [ ] Iterate combo scoring weights based on owner preferences
+- [ ] Finalize documentation for final report submission
