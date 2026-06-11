@@ -198,11 +198,23 @@
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
       "command-palette:打开命令面板": false,
-      "bases:新建数据库": false
+      "bases:新建数据库": false,
+      "templater-obsidian:Templater": false
     }
   },
-  "active": "92fc476d91130c4e",
+  "active": "0a352504e98d2e1d",
   "lastOpenFiles": [
+    "courses",
+    "literature/CIO/The Vehicle-Routing Problem with Satellites Utilization A Systematic Review of the Literature..pdf",
+    "literature/CIO/Robust dual sourcing inventory routing optimization for disaster relief _ PLOS One.pdf",
+    "literature/CIO/Post-Earthquake Emergency Logistics Location-Routing Optimization Considering Vehicle Three-Dimensional Loading Constraints.pdf",
+    "literature/CIO/Optimization of Multi-Trip Vehicle Routing Problem Considering Multiple Delivery Locations..pdf",
+    "literature/CIO/Online path planning for disaster response in the presence of unknown road disruptions.pdf",
+    "literature/CIO/Building Disaster Resilience A Sustainable Approach to Integrated Road Rehabilitation and Emergency Logistics Optimization in Extreme Events.pdf",
+    "literature/CIO/A_Review_of_Applicable_Technologies_Routing_Protocols_Requirements_and_Architecture_for_Disaster_Area_Networks.pdf",
+    "literature/CIO/A Sustainable Workforce Scheduling System for County-Level Logistics Centers Under Uncertain Demand Integrating Human-Centered Objectives and Change Management Perspectives.pdf",
+    "literature/CIO/A Memetic Algorithm for Vehicle Routing Problem with Fresh Food and Heterogeneous Customer Behavior.pdf",
+    "literature/CIO",
     "projects/dl/README.md",
     "hermes/tasks/dl-008.md",
     "hermes/tasks/dl-007.md",
@@ -214,23 +226,13 @@
     "hermes/tasks/dl-001.md",
     "projects/final-report/README.md",
     "欢迎.md",
-    "projects/dl",
     "hermes/hermes-core-duty.md",
     "hermes/tasks/fr-001.md",
     "创建链接.md",
     "projects/final-report/hermes/tasks/fr-001.md",
-    "projects/final-report/hermes/tasks",
-    "projects/final-report/hermes",
-    "projects/final-report",
-    "knowledge/research",
-    "literature",
-    "templates",
-    "experiments",
-    "knowledge/coding",
     "AGENTS.md",
     "hermes/project-status.md",
     "hermes/queue.md",
-    "hermes/decisions.md",
-    "projects"
+    "hermes/decisions.md"
   ]
 }
