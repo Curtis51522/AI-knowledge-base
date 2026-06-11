@@ -4,31 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "cf6dd400881a3802",
+        "id": "11562ebde0d815d4",
         "type": "tabs",
         "children": [
           {
-            "id": "c00229e90d48695d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "projects/dl/README.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "README"
-            }
-          }
-        ]
-      },
-      {
-        "id": "5fe862230a24d64b",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "92fc476d91130c4e",
+            "id": "dc894375e18cdde0",
             "type": "leaf",
             "state": {
               "type": "graph",
@@ -190,49 +170,55 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "markdown-importer:打开 Markdown 格式转换器": false,
-      "obsidian-git:Open Git source control": false,
       "switcher:打开快速切换": false,
       "graph:查看关系图谱": false,
       "canvas:新建白板": false,
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
       "command-palette:打开命令面板": false,
+      "markdown-importer:打开 Markdown 格式转换器": false,
       "bases:新建数据库": false,
+      "obsidian-git:Open Git source control": false,
       "templater-obsidian:Templater": false
     }
   },
-  "active": "0a352504e98d2e1d",
+  "active": "dc894375e18cdde0",
   "lastOpenFiles": [
-    "courses",
-    "literature/CIO/The Vehicle-Routing Problem with Satellites Utilization A Systematic Review of the Literature..pdf",
-    "literature/CIO/Robust dual sourcing inventory routing optimization for disaster relief _ PLOS One.pdf",
-    "literature/CIO/Post-Earthquake Emergency Logistics Location-Routing Optimization Considering Vehicle Three-Dimensional Loading Constraints.pdf",
-    "literature/CIO/Optimization of Multi-Trip Vehicle Routing Problem Considering Multiple Delivery Locations..pdf",
-    "literature/CIO/Online path planning for disaster response in the presence of unknown road disruptions.pdf",
-    "literature/CIO/Building Disaster Resilience A Sustainable Approach to Integrated Road Rehabilitation and Emergency Logistics Optimization in Extreme Events.pdf",
-    "literature/CIO/A_Review_of_Applicable_Technologies_Routing_Protocols_Requirements_and_Architecture_for_Disaster_Area_Networks.pdf",
-    "literature/CIO/A Sustainable Workforce Scheduling System for County-Level Logistics Centers Under Uncertain Demand Integrating Human-Centered Objectives and Change Management Perspectives.pdf",
-    "literature/CIO/A Memetic Algorithm for Vehicle Routing Problem with Fresh Food and Heterogeneous Customer Behavior.pdf",
-    "literature/CIO",
-    "projects/dl/README.md",
-    "hermes/tasks/dl-008.md",
-    "hermes/tasks/dl-007.md",
-    "hermes/tasks/dl-006.md",
-    "hermes/tasks/dl-005.md",
-    "hermes/tasks/dl-004.md",
-    "hermes/tasks/dl-003.md",
-    "hermes/tasks/dl-002.md",
-    "hermes/tasks/dl-001.md",
-    "projects/final-report/README.md",
-    "欢迎.md",
-    "hermes/hermes-core-duty.md",
-    "hermes/tasks/fr-001.md",
-    "创建链接.md",
-    "projects/final-report/hermes/tasks/fr-001.md",
-    "AGENTS.md",
-    "hermes/project-status.md",
-    "hermes/queue.md",
-    "hermes/decisions.md"
+    "literature/AI hallucination/Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena.md",
+    "literature/AI hallucination/A Multitask, Multilingual, Multimodal Evaluation of ChatGPT on Reasoning, Hallucination, and Interactivity.md",
+    "’none’,’none’.md",
+    "literature/CIO/The Vehicle-Routing Problem with Satellites Utilization A Systematic Review of the Literature..md",
+    "literature/CIO/Robust dual sourcing inventory routing optimization for disaster relief _ PLOS One.md",
+    "literature/CIO/Post-Earthquake Emergency Logistics Location-Routing Optimization Considering Vehicle Three-Dimensional Loading Constraints.md",
+    "literature/CIO/Optimization of Multi-Trip Vehicle Routing Problem Considering Multiple Delivery Locations..md",
+    "literature/CIO/Online path planning for disaster response in the presence of unknown road disruptions.md",
+    "literature/CIO/Building Disaster Resilience A Sustainable Approach to Integrated Road Rehabilitation and Emergency Logistics Optimization in Extreme Events.md",
+    "literature/CIO/A_Review_of_Applicable_Technologies_Routing_Protocols_Requirements_and_Architecture_for_Disaster_Area_Networks.md",
+    "literature/CIO/A Sustainable Workforce Scheduling System for County-Level Logistics Centers Under Uncertain Demand Integrating Human-Centered Objectives and Change Management Perspectives.md",
+    "literature/CIO/A Memetic Algorithm for Vehicle Routing Problem with Fresh Food and Heterogeneous Customer Behavior.md",
+    "literature/Applied robotics/Trajectory Planning for Robotic Manipulators in Automated Palletizing A Comprehensive Review.md",
+    "literature/Applied robotics/Trajectory Planning for Intelligent Robotic and Mechatronic Systems.md",
+    "literature/Applied robotics/Research on Path Planning Technology of Industrial Robot.md",
+    "literature/Applied robotics/Reinforcement Learning of a Six-DOF Industrial Manipulator for Pick-and-Place Application Using Efficient Control in Warehouse Management.md",
+    "literature/Applied robotics/Path planning of industrial robots based on the adaptive field cooperative sampling algorithm.md",
+    "literature/Applied robotics/On the Use of a Genetic Algorithm for Determining Ho–Cook Coefficients in Continuous Path Planning of Industrial Robotic Manipulators.md",
+    "literature/Applied robotics/Evaluating Energy Efficiency and Optimal Positioning of Industrial Robots in Sustainable Manufacturing.md",
+    "literature/Applied robotics/esign of an educational stand with ABB IRB 120 for online and offline programming.md",
+    "literature/Applied robotics/Engineering Method and Tool for the Complete Virtual Commissioning of Robotic Cells.md",
+    "literature/Applied robotics/Collision-free trajectory planning for robotic assembly of lightweight structures.md",
+    "literature/Applied robotics/50 years of robotics.md",
+    "literature/AI hallucination/Trusting Your Evidence Hallucinate Less with Context-aware Decoding.md",
+    "literature/AI hallucination/The Internal State of an LLM Knows When It's Lying.md",
+    "literature/AI hallucination/SelfCheckGPT Zero-Resource Black-Box Hallucination Detection for Generative Large Language Models.md",
+    "literature/AI hallucination/Trusting Your Evidence Hallucinate Less with Context-aware Decoding.pdf",
+    "literature/AI hallucination/SelfCheckGPT Zero-Resource Black-Box Hallucination Detection for Generative Large Language Models.pdf",
+    "literature/AI hallucination/Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena.pdf",
+    "literature/AI hallucination/HalluMeasure Fine-grained Hallucination Measurement Using.pdf",
+    "literature/AI hallucination/G-Eval NLG Evaluation using GPT-4 with Better Human Alignment.pdf",
+    "literature/AI hallucination/Drowzee Metamorphic Testing for Fact-Conflicting Hallucination Detection in Large Language Models.pdf",
+    "literature/AI hallucination/A Multitask, Multilingual, Multimodal Evaluation of ChatGPT on Reasoning, Hallucination, and Interactivity.pdf",
+    "literature/AI hallucination/The Internal State of an LLM Knows When It's Lying.pdf",
+    "literature/AI hallucination/Right for Right Reasons Large Language Models for Verifiable Commonsense Knowledge Graph Question Answering.pdf",
+    "literature/AI hallucination/Multiple_Choice_Questions_Reasoning_Makes_Large_Language_Models_LLMs_More_Self-Confident_specially_When_They_are_Wrong.pdf"
   ]
 }
