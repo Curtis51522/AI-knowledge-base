@@ -1,4 +1,4 @@
-﻿# Hermes Agent Instructions
+# Hermes Agent Instructions
 # This file encodes the task-queue protocol between Codex (executor) and Hermes (butler).
 # Codex reads this on every startup. Hermes writes task files; Codex reads, executes, and writes results.
 

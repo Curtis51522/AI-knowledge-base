@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "11562ebde0d815d4",
+        "id": "d2f88a8c7b5025a2",
         "type": "tabs",
         "children": [
           {
-            "id": "dc894375e18cdde0",
+            "id": "232776a596068855",
             "type": "leaf",
             "state": {
               "type": "graph",
@@ -182,8 +182,14 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "dc894375e18cdde0",
+  "active": "232776a596068855",
   "lastOpenFiles": [
+    "projects/final-report/README.md",
+    "knowledge/coding/yolo-bakery.md",
+    "knowledge/research/未命名.md",
+    "欢迎.md",
+    "AGENTS.md",
+    "rating.md",
     "literature/AI hallucination/Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena.md",
     "literature/AI hallucination/A Multitask, Multilingual, Multimodal Evaluation of ChatGPT on Reasoning, Hallucination, and Interactivity.md",
     "’none’,’none’.md",
@@ -204,12 +210,6 @@
     "literature/Applied robotics/On the Use of a Genetic Algorithm for Determining Ho–Cook Coefficients in Continuous Path Planning of Industrial Robotic Manipulators.md",
     "literature/Applied robotics/Evaluating Energy Efficiency and Optimal Positioning of Industrial Robots in Sustainable Manufacturing.md",
     "literature/Applied robotics/esign of an educational stand with ABB IRB 120 for online and offline programming.md",
-    "literature/Applied robotics/Engineering Method and Tool for the Complete Virtual Commissioning of Robotic Cells.md",
-    "literature/Applied robotics/Collision-free trajectory planning for robotic assembly of lightweight structures.md",
-    "literature/Applied robotics/50 years of robotics.md",
-    "literature/AI hallucination/Trusting Your Evidence Hallucinate Less with Context-aware Decoding.md",
-    "literature/AI hallucination/The Internal State of an LLM Knows When It's Lying.md",
-    "literature/AI hallucination/SelfCheckGPT Zero-Resource Black-Box Hallucination Detection for Generative Large Language Models.md",
     "literature/AI hallucination/Trusting Your Evidence Hallucinate Less with Context-aware Decoding.pdf",
     "literature/AI hallucination/SelfCheckGPT Zero-Resource Black-Box Hallucination Detection for Generative Large Language Models.pdf",
     "literature/AI hallucination/Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena.pdf",
