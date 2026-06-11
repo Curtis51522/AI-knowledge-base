@@ -1,29 +1,25 @@
-# Project Status
-# Managed by Hermes, updated by Codex after execution.
+# 项目状态
 
-## Active Projects
+## 活跃项目
 
-| Project | Status | Priority | Last Updated | Current Sprint |
-|---------|--------|----------|-------------|----------------|
-| [[projects/final-report/README|final-report]] | Field Testing & Iteration | High | 2026-06-11 | Offline field test prep |
-| [[projects/dl/README\|dl]] | Paper Writing | High | 2026-06-11 | Paper drafting & formatting |
+| 项目                                             | 状态      | 优先级 | 最后更新       | 当前阶段     |
+| ---------------------------------------------- | ------- | --- | ---------- | -------- |
+| [[projects/final-report/README\|final-report]] | 现场测试与迭代 | 高   | 2026-06-11 | 离线现场测试准备 |
+| [[projects/dl/README\|dl]]                     | 论文撰写    | 高   | 2026-06-11 | 文献综述     |
 
-## Project Details
+## 项目详情
 
-### final-report — Bakery AI System
-- **Goal:** Multi-agent AI operations system for a Malaysian bakery-cafe (KL). 6 products, 6 coffee beverages, 10 employees, 2 ovens, 2 checkout counters.
-- **Subsystems (all completed):**
-  - S1: YOLOv8n visual recognition + OpenCV tray-color classification
-  - S2: XGBoost demand forecasting (7-day, with weather integration)
-  - S3: OR-Tools CP-SAT shift scheduling (dual-role, sick leave, KPI persistence)
-  - S4: POS frontend + combo engine (JWT auth, 5-dim scoring, DeepSeek sales scripts)
-  - S5: AI Brain (DistilBERT intent classifier, 6 agents, MIP + DeepSeek synthesis)
-- **Known Limitations:** No real sales data yet, YOLO untested with real camera, revenue = RM0, two servers need manual startup
-- **Next:** Bring to bakery for real-world testing, gather owner/staff feedback, iterate
+### final-report —— 烘焙 AI 系统
+- **目标：** 为马来西亚吉隆坡一家中型烘焙咖啡店构建多智能体 AI 运营系统。6 种面包、6 种咖啡饮品、10 名员工、2 台烤箱、2 个收银台。
+- **子系统（全部完成）：**
+  - S1：YOLOv8n 视觉识别 + OpenCV 托盘颜色分类
+  - S2：XGBoost 需求预测（7 天，含天气数据集成）
+  - S3：OR-Tools CP-SAT 排班调度（双角色、病假替换、KPI 持久化）
+  - S4：POS 前端 + 套餐引擎（JWT 认证、五维评分、DeepSeek 销售话术）
+  - S5：AI 大脑（DistilBERT 意图分类器、6 个智能体、MIP + DeepSeek 综合决策）
+- **已知限制：** 尚无真实销售数据、YOLO 未用真实摄像头测试、收入为零、两个服务器需手动启动
+- **下一步：** 带到面包店进行真实环境测试，收集店主/员工反馈，迭代改进
 
-
-### dl — OCT Retinal Image Classification
-- **Goal:** OCT retinal image 4-class classification (CNV/DME/DRUSEN/NORMAL) using ConvNeXt-Base vs Swin-Tiny on OCT2017_30K_V2 dataset.
-- **Status:** All experiments complete. ConvNeXt test acc 0.9531, Swin-Tiny test acc 0.9562. Swin-Tiny wins on accuracy + speed.
-- **Next:** Write academic paper (APU format), embed figures from outputs/, submit final.ipynb + paper.
-- **Key files:** `final.ipynb` at `C:\Users\Curtis\Desktop\learningmaterials\SEMESTER3\DL\notebook\final.ipynb`
+### dl —— 深度学习论文
+- **状态：** 文献综述进行中
+- **下一步：** 检索 15-20 篇 OCT 相关文献（2021-2025），开始撰写引言
