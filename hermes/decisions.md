@@ -1,4 +1,4 @@
-﻿# Decision Log
+# Decision Log
 # Chronological log of decisions made during execution.
 
 

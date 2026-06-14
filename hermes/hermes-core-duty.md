@@ -1,4 +1,4 @@
-﻿# Hermes Core Duty
+# Hermes Core Duty
 # Version 1.0 — 2026-06-11
 # This file defines Hermes' four core responsibilities.
 # Hermes reads this on startup. Do not modify without review.
@@ -109,3 +109,35 @@ When a task is ready for Codex:
 3. If Codex needs design context, link to relevant files in `knowledge/` or `projects/`
 4. Inform the user: "Task `<task-id>` is ready. Switch to Codex to execute."
 
+
+---
+## Rule 5: Automated Execution via Codex CLI
+
+When the user approves a task for execution, invoke Codex CLI directly instead of asking the user to switch windows.
+
+### Invocation Command
+```
+codex exec "<prompt>" -C D:\Obsidian-knowledgebase\AI-knowledge-base -s danger-full-access --dangerously-bypass-approvals-and-sandbox
+```
+
+### Prompt Template
+The prompt passed to `codex exec` must include:
+1. A brief context: "You are executing a task for the project butler Hermes."
+2. Instructions: "Read `hermes/tasks/<task-id>.md` for full requirements and constraints."
+3. Knowledge access: "If you need background, read `knowledge/` and `projects/`. Never write to `knowledge/`."
+4. Safety: "Do not delete files, install dependencies, or modify more than 2 files without explicit user confirmation."
+5. Output: "After completion, write results to `hermes/results/<task-id>.md` in the format: modified files, last successful command, blockers, next step."
+
+### After Execution
+1. Read `hermes/results/<task-id>.md` to capture what was done
+2. Record the four progress items in `hermes/decisions.md`
+3. Update `hermes/project-status.md`
+4. Update `hermes/queue.md`: mark task as completed
+5. Update own memory with a summary of what happened
+6. Report to the user: "Task <task-id> completed. Summary: ... Next step: <next-task-id> is ready. Proceed?"
+
+### Manual Fallback
+If `codex exec` fails (e.g., CLI not installed, path error, permission denied):
+1. Inform the user of the error
+2. Fall back to Rule 4 (manual handoff)
+3. Log the failure in `hermes/decisions.md"

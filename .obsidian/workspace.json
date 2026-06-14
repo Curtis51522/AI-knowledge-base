@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "hermes/project-status.md",
+                "file": "hermes/decisions.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "project-status"
+              "title": "decisions"
             }
           }
         ]
@@ -33,7 +33,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "hermes/project-status.md",
+                "file": "hermes/decisions.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -61,7 +61,7 @@
                 }
               },
               "icon": "lucide-git-fork",
-              "title": "project-status 的关系图"
+              "title": "decisions 的关系图"
             }
           }
         ]
@@ -230,10 +230,12 @@
   },
   "active": "a98294dd91b26c1c",
   "lastOpenFiles": [
+    "hermes/hermes-core-duty.md",
+    "hermes/project-status.md",
+    "hermes/decisions.md",
     "_write_task.py",
     "_write_readme.py",
     "projects/dl/README.md",
-    "hermes/project-status.md",
     "projects/final-report/README.md",
     "hermes/queue.md",
     "knowledge/coding/yolo-bakery.md",
@@ -256,7 +258,6 @@
     "literature/Applied robotics/Trajectory Planning for Robotic Manipulators in Automated Palletizing A Comprehensive Review.md",
     "literature/Applied robotics/Trajectory Planning for Intelligent Robotic and Mechatronic Systems.md",
     "literature/Applied robotics/Research on Path Planning Technology of Industrial Robot.md",
-    "literature/Applied robotics/Reinforcement Learning of a Six-DOF Industrial Manipulator for Pick-and-Place Application Using Efficient Control in Warehouse Management.md",
     "literature/AI hallucination/Trusting Your Evidence Hallucinate Less with Context-aware Decoding.pdf",
     "literature/AI hallucination/SelfCheckGPT Zero-Resource Black-Box Hallucination Detection for Generative Large Language Models.pdf",
     "literature/AI hallucination/Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena.pdf",
@@ -264,7 +265,6 @@
     "literature/AI hallucination/G-Eval NLG Evaluation using GPT-4 with Better Human Alignment.pdf",
     "literature/AI hallucination/Drowzee Metamorphic Testing for Fact-Conflicting Hallucination Detection in Large Language Models.pdf",
     "literature/AI hallucination/A Multitask, Multilingual, Multimodal Evaluation of ChatGPT on Reasoning, Hallucination, and Interactivity.pdf",
-    "literature/AI hallucination/The Internal State of an LLM Knows When It's Lying.pdf",
-    "literature/AI hallucination/Right for Right Reasons Large Language Models for Verifiable Commonsense Knowledge Graph Question Answering.pdf"
+    "literature/AI hallucination/The Internal State of an LLM Knows When It's Lying.pdf"
   ]
 }
