@@ -182,6 +182,7 @@
   },
   "active": "267f1c806d898664",
   "lastOpenFiles": [
+    "literature/AI Agents/学术英语论文常见表达速查.md",
     "literature/AI Agents/Execution-State Capsules - Graph-Bound Execution-State Checkpoint and Restore.md",
     "literature/AI Agents/_test_note.md",
     "literature/AI Agents/Transformer - Attention Is All You Need.md",
@@ -210,7 +211,6 @@
     "literature/AI hallucination/Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena.md",
     "literature/AI hallucination/A Multitask, Multilingual, Multimodal Evaluation of ChatGPT on Reasoning, Hallucination, and Interactivity.md",
     "’none’,’none’.md",
-    "literature/CIO/The Vehicle-Routing Problem with Satellites Utilization A Systematic Review of the Literature..md",
     "literature/AI hallucination/Trusting Your Evidence Hallucinate Less with Context-aware Decoding.pdf",
     "literature/AI hallucination/SelfCheckGPT Zero-Resource Black-Box Hallucination Detection for Generative Large Language Models.pdf",
     "literature/AI hallucination/Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena.pdf",
