@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "35a19a948c352d6d",
+        "id": "8056af42e25f3110",
         "type": "tabs",
         "children": [
           {
-            "id": "267f1c806d898664",
+            "id": "ec5730c4245915a8",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "关系图谱"
+              "type": "markdown",
+              "state": {
+                "file": "literature/AI Agents/学术英语论文常见表达速查.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "学术英语论文常见表达速查"
             }
           }
         ]
@@ -150,12 +154,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "literature/AI Agents/学术英语论文常见表达速查.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "大纲"
+              "title": "学术英语论文常见表达速查 的大纲"
             }
           }
         ],
@@ -180,8 +185,12 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "267f1c806d898664",
+  "active": "ec5730c4245915a8",
   "lastOpenFiles": [
+    "hermes/decisions.md",
+    "hermes/hermes-core-duty.md",
+    "hermes/project-status.md",
+    "hermes/queue.md",
     "literature/AI Agents/学术英语论文常见表达速查.md",
     "literature/AI Agents/Execution-State Capsules - Graph-Bound Execution-State Checkpoint and Restore.md",
     "literature/AI Agents/_test_note.md",
@@ -194,15 +203,11 @@
     "literature/AI Agents/Toward Calibrated Mixture-of-Experts Under Distribution Shift.md",
     "literature/AI Agents/Multi-LCB - Extending LiveCodeBench to Multiple Programming Languages.md",
     "Sovereign Execution Brokers.md",
-    "hermes/decisions.md",
     "literature/AI Agents",
-    "hermes/project-status.md",
-    "hermes/hermes-core-duty.md",
     "projects/final-report/README.md",
     "_write_task.py",
     "_write_readme.py",
     "projects/dl/README.md",
-    "hermes/queue.md",
     "knowledge/coding/yolo-bakery.md",
     "knowledge/research/未命名.md",
     "欢迎.md",
