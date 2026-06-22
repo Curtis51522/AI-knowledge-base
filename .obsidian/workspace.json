@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "hermes/decisions.md",
+                "file": "hermes/project-status.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "decisions"
+              "title": "project-status"
             }
           }
         ]
@@ -33,7 +33,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "hermes/decisions.md",
+                "file": "hermes/project-status.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -56,12 +56,12 @@
                   "repelStrength": 10,
                   "linkStrength": 1,
                   "linkDistance": 250,
-                  "scale": 1,
+                  "scale": 0.9999999999999997,
                   "close": true
                 }
               },
               "icon": "lucide-git-fork",
-              "title": "decisions 的关系图"
+              "title": "project-status 的关系图"
             }
           }
         ]
@@ -228,15 +228,15 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "a98294dd91b26c1c",
+  "active": "6b7ad65cdeb1193c",
   "lastOpenFiles": [
-    "hermes/hermes-core-duty.md",
+    "projects/final-report/README.md",
     "hermes/project-status.md",
     "hermes/decisions.md",
+    "hermes/hermes-core-duty.md",
     "_write_task.py",
     "_write_readme.py",
     "projects/dl/README.md",
-    "projects/final-report/README.md",
     "hermes/queue.md",
     "knowledge/coding/yolo-bakery.md",
     "knowledge/research/未命名.md",
