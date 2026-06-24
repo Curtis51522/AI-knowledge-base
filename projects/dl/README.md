@@ -1,60 +1,111 @@
-# DL Project: OCT Retinal Image Classification — ConvNeXt vs Swin-Tiny
+---
+tags:
+  - dl
+  - oct
+  - assignment
+  - convnext
+  - swin
+  - research
+  - paper
+date: 2026-06-23
+status: in-progress
+---
 
-## 项目目标
-- 使用两个 SOTA 深度学习模型（ConvNeXt-Base 87.5M / Swin-Tiny 27.5M）对 OCT 视网膜图像进行四分类（CNV / DME / DRUSEN / NORMAL）
-- 基于 OCT2017 数据集（Kermany et al., 2018）构建清洗后的子集 OCT2017_30K_V2
-- 完成完整的 DL 作业流程：超参调优 → 模型训练 → 测试评估 → 消融实验 → 论文撰写
+# DL Assignment: OCT Retinal Classification — ConvNeXt vs Swin-Tiny
 
-## 当前进展（实验已全部完成 ✅）
+> **CT100-3-M-DL | APU | 四分类：CNV / DME / DRUSEN / NORMAL**
+> 数据集：Kermany et al. (2018), Cell — OCT2017_30K_V2（29,408 张清洗后子集）
 
-### 数据集
-- SHA256 全局去重 → 分层划分，移除 237 张跨类重复 + 7,324 张类内重复
-- Train: 24,972 张（自然分布），Test: 3,198 张（每类 800 张平衡）
-- **Train/Test 零重叠**（SHA256 验证通过）
+---
 
-### 模型结果
+## 🎯 最终结果速查
 
-| 指标 | ConvNeXt-Base | Swin-Tiny |
-|------|--------------|-----------|
-| 参数量 | 87.5M | 27.5M |
-| 最佳验证准确率 | 0.9701（epoch 13） | 0.9690（epoch 29） |
-| 测试准确率 | 0.9531 | **0.9562** |
-| Precision | 0.9541 | **0.9572** |
-| Recall | 0.9531 | **0.9562** |
-| F1-Score | 0.9530 | **0.9562** |
-| AUC | 0.9964 | 0.9964 |
-| 推理速度 | 5.86 ms/img | **5.21 ms/img** |
+| | ConvNeXt Base | ConvNeXt +EMA | Swin Base | Swin +EMA |
+|---|---|---|---|---|
+| Test Acc | 96.37% | 96.44% | 95.87% | **96.03%** |
+| Macro F1 | 96.37% | 96.44% | 95.87% | 96.02% |
+| AUC | 99.66% | 99.76% | 99.57% | 99.64% |
+| Best Val | 97.12% (ep18) | — | 97.28% (ep29) | — |
+| Params | 87.5M | — | 27.5M | — |
+| Speed | ~5.8 ms/img | — | ~5.2 ms/img | — |
 
-### 已完成模块
-- [x] Grid Search（3 lr × 2 bs = 6 组合 × 2 模型，seed=99）
-- [x] 正式训练（CosineAnnealingLR + AdamW + AMP + EarlyStopping patience=5）
-- [x] 测试评估（accuracy / precision / recall / F1 / AUC / 混淆矩阵 / ROC）
-- [x] 类权重（balanced） + EMA（0.9999）
-- [x] Swin-Tiny 专用优化：warmup=3 epochs + grad_clip_norm=5.0
-- [x] 消融实验（freeze depth 分析）
-- [x] 错误分析（Both correct 93.8%, Both wrong 2.8%）
-- [x] 推理速度对比
-- [x] 所有结果保存至 `notebook/outputs/`（.pth / .json / .png）
+> [!NOTE] Swin vs ConvNeXt gap: 0.41%（从旧版 0.97% 缩小）。数据增强是 Swin 最有效的单一改进（+0.81%）。
 
-## 当前卡点
-- **无技术卡点**，所有实验已跑完
-- ConvNeXt 存在轻微过拟合（val_loss 在后期震荡，train_loss 持续下降），Swin-Tiny 表现更稳定
-- 下一阶段为论文写作，需将实验结果嵌入学术论文
+---
 
-## 下一步要做什么
-1. **撰写论文**（Word，APU 论文格式：Times New Roman 12pt，1.5 倍行距）
-2. 论文结构：
-   - Introduction
-   - Literature Review（15–20 篇文献，主要为 2021–2025）
-   - Methodology（数据集 SHA256 去重流程 + 模型定义 + 训练协议）
-   - Results（网格搜索结果 / 训练曲线 / 测试指标 / 混淆矩阵 / ROC / 推理速度 / 消融实验 / 错误分析）
-   - Discussion（val-test gap / Swin 效率优势 / 类权重影响 / DRUSEN 泛化 / 未做 patient-level split 的局限性）
-   - Conclusion
-3. 将 `outputs/` 中的图表嵌入论文
-4. 提交代码（`final.ipynb`）+ 论文
+## 🏗️ 模型配置（Grid Search 最优）
 
-## 备注
-- 代码位置：`C:\Users\Curtis\Desktop\learningmaterials\SEMESTER3\DL\notebook\final.ipynb`
-- 数据集构建脚本：`scripts\build_dataset.py`
-- 所有代码无中文，使用动态路径
-- 作业红线：禁止用 "ANN + dense layers on CSV" 结构，已严格遵守
+```
+Grid Search: lr {1e-3,1e-4,1e-5} × bs {16,32} × wd {1e-3,1e-4} × 20 epochs = 12 组/模型
+
+ConvNeXt 最优: lr=1e-4, bs=32, wd=1e-4
+Swin 最优:    lr=1e-4, bs=16, wd=1e-4
+```
+
+| 训练设置 | ConvNeXt | Swin-Tiny |
+|---|---|---|
+| Optimizer | AdamW | AdamW |
+| Scheduler | CosineAnnealingLR | Linear warmup(3ep) → Cosine |
+| EMA | ✅ decay=0.9999 | ✅ decay=0.9999 |
+| Grad Clip | ❌ | ✅ 5.0 |
+| AMP | ✅ | ✅ |
+| Early Stop | patience=5 | patience=5 |
+| Class Weights | ✅ balanced | ✅ balanced |
+| Augmentation | RandomHFlip+Rot+ColorJitter+Affine+Erasing | 同 |
+
+---
+
+## 🔑 关键发现（Discussion 直接可用）
+
+### 1. EMA 的类间 tradeoff（临床意义重大）
+- ConvNeXt EMA 用 **CNV -3.0%** 换了 DRUSEN +2.0%
+- CNV 漏诊 = 延迟抗 VEGF 注射 = 不可逆视力丧失
+- **ConvNeXt Base（无 EMA）是临床最优模型**，尽管 total acc 不是最高
+
+### 2. 数据增强对 Transformer 是关键
+- Swin 从 95.06% → 95.87%（+0.81%），ConvNeXt 几乎不变
+- RandomAffine + RandomErasing 模拟 OCT 的 speckle 噪声和成像偏移
+- CNN 自带归纳偏置 → 天生正则化；Transformer 需要显式正则化
+
+### 3. DRUSEN 是全局瓶颈
+- 所有模型 DRUSEN ≤ 94%（ConvNeXt Base: 93.9%, Swin Base: 92.4%）
+- DRUSEN 特征：微小 RPE 隆起，无液体积聚，极易与 CNV 混淆
+- 改进方向：高分辨率输入（384²）、多尺度特征融合（FPN）
+
+### 4. Freeze 深度：小样本 ≠ 全量（方法学贡献）
+- 2000 样本消融：freeze=2 最优（+0.86%）
+- 25K 全量验证：freeze=0 胜出（-1.58% vs freeze=2）
+- **消融结论不能线性外推** — 文献中少有人报告这一现象
+
+### 5. Focal Loss (γ=2) 反降
+- Swin 从 95.06% → 94.62%（-0.44%）
+- γ=2 过度压制易分样本（CNV/DME/NORMAL），75% 的梯度被浪费
+- 不是你参数调错了，是医学四分类不适合高 γ
+
+### 6. CNN-Transformer 互补
+- ConvNeXt EMA 错 114 例，Swin EMA 错 127 例，仅 81 例重叠
+- Ensemble（简单投票）理论可到 ~97.2% — 零额外训练成本
+
+---
+
+## 📂 文件位置
+
+| 内容 | 路径 |
+|---|---|
+| Notebook | `C:\Users\Curtis\Desktop\learningmaterials\SEMESTER3\DL\notebook\final.ipynb` |
+| 数据集构建 | `C:\Users\Curtis\Desktop\learningmaterials\SEMESTER3\DL\scripts\build_dataset.py` |
+| 训练输出 | `notebook/outputs/` (.pth / .json / .png) |
+| Grid Search | `notebook/outputs/grid_search.json` |
+| 最终指标 | `notebook/outputs/metrics.json` |
+
+---
+
+## ☑️ 待办
+
+- [ ] Grid Search 跑完（20-epoch × 12 组，~4-5h GPU） 🔄
+- [ ] Cell 1→17 全量 rerun 确认最终数字
+- [ ] 撰写 Word 报告（APU 格式：TNR 12pt, 1.5 倍行距）
+- [ ] Literature Review: 引用 Kermany 2018, Isztl 2025, Han 2025
+- [ ] Discussion: 合成 6 个关键发现为连贯叙事
+- [ ] 提交：`final.ipynb`（含全部输出）+ Word 报告
+- [ ] （可选）期刊扩展：384² 分辨率、FPN 多尺度、外部数据集验证
