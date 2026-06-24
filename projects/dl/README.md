@@ -7,7 +7,7 @@ tags:
   - swin
   - research
   - paper
-date: 2026-06-23
+date: 2026-06-24
 status: in-progress
 ---
 
@@ -88,6 +88,59 @@ Swin 最优:    lr=1e-4, bs=16, wd=1e-4
 
 ---
 
+## 🎯 期刊投稿路线图
+
+### 推荐期刊：IJIST（International Journal of Imaging Systems and Technology）
+| 项目 | 值 |
+|------|-----|
+| **中科院大类（计算机科学）** | **3区** |
+| **中科院小类（工程电子电气）** | **3区** |
+| JCR 分区 | Q3 |
+| 影响因子 | 3.0 |
+| 审稿周期 | ~3个月 |
+| 录用比例 | 容易 |
+
+### 其他候选
+- JMIHI（Journal of Medical Imaging and Health Informatics）— Q3，但声誉一般
+- IET Image Processing — Q3，竞争更大
+
+### 当前状态的差距
+
+| 维度 | 差距 | 严重度 |
+|------|------|--------|
+| 方法创新 | 零创新，纯对比工作 | 🔴 致命 |
+| 泛化验证 | 只用了 Kermany 一个数据集 | 🔴 致命 |
+| Baseline 完整性 | 只有 ConvNeXt 和 Swin，缺 ResNet50/EfficientNet/ViT | 🟡 重要 |
+| 统计严谨性 | 无重复 seed、无置信区间、无显著性检验 | 🟡 重要 |
+| 医学合作者 | 无医生，Discussion 缺临床洞察 | 🟡 重要 |
+| 写作 | 课程报告长度 + 文献综述深度不足 | 🟢 可加 |
+
+### 必须补的三件事
+1. **加第二个数据集**（OCTID ~500张 或 Duke DME）做 zero-shot 跨域验证
+2. **补 baseline**：ResNet50+SE、EfficientNet-B3、ViT-Base/16，跑 3 次 seed 出 mean±std
+3. **增量创新**：把互补性错例 → Class-Adaptive EMA（见 `DL/notebook/class_adaptive_ema.py`）
+
+### 实验计划
+```
+主实验:   Kermany OCT2017 原始83K → 跟前人论文公平对比
+验证泛化: OCTID / Duke DME       → zero-shot 推理
+副实验:   V2 清洗版 29K          → 展示去重+清洗对结果的提升
+```
+
+### 审稿人最可能的拒稿理由（按概率）
+1. **缺乏方法创新** (70%) — 纯应用没改进
+2. **数据集单一** (60%) — 单数据集泛化性存疑
+3. **统计不充分** (50%) — 无重复 seed 和置信区间
+4. **医学意义缺失** (40%) — Discussion 深度不够
+5. **文献引用不足** (30%) — 需补近 3 年 SOTA 对比
+
+### 诚实评估
+- 当前状态直接投 Q3：成功率 <5%
+- 补完增量任务后投 IJIST：成功率 ~40-50%
+- 最大卖点：CNN-Transformer 互补错误 + Class-Adaptive EMA
+
+---
+
 ## 📂 文件位置
 
 | 内容 | 路径 |
@@ -97,15 +150,18 @@ Swin 最优:    lr=1e-4, bs=16, wd=1e-4
 | 训练输出 | `notebook/outputs/` (.pth / .json / .png) |
 | Grid Search | `notebook/outputs/grid_search.json` |
 | 最终指标 | `notebook/outputs/metrics.json` |
+| Class-Adaptive EMA | `notebook/class_adaptive_ema.py` |
 
 ---
 
 ## ☑️ 待办
 
 - [ ] Grid Search 跑完（20-epoch × 12 组，~4-5h GPU） 🔄
-- [ ] Cell 1→17 全量 rerun 确认最终数字
+- [ ] 主实验用原始 OCT2017 83K 重跑
+- [ ] 跑 Class-Adaptive EMA（已有代码 + 已有 checkpoint → ~5 分钟出结果）
+- [ ] 下载 OCTID 做跨域泛化验证
+- [ ] 补 baseline：ResNet50+SE、EfficientNet-B3、ViT-Base
+- [ ] 跑 3×seed + 统计检验（mean±std + McNemar）
 - [ ] 撰写 Word 报告（APU 格式：TNR 12pt, 1.5 倍行距）
-- [ ] Literature Review: 引用 Kermany 2018, Isztl 2025, Han 2025
-- [ ] Discussion: 合成 6 个关键发现为连贯叙事
-- [ ] 提交：`final.ipynb`（含全部输出）+ Word 报告
-- [ ] （可选）期刊扩展：384² 分辨率、FPN 多尺度、外部数据集验证
+- [ ] IJIST 格式短论文（5-6页）
+- [ ] 提交：`final.ipynb`（含全部输出）+ Word 报告 + 期刊论文
