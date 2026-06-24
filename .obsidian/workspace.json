@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "8056af42e25f3110",
+        "id": "7996c8fcfd872f43",
         "type": "tabs",
         "children": [
           {
-            "id": "ec5730c4245915a8",
+            "id": "639109747dd4a281",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -185,8 +185,9 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "ec5730c4245915a8",
+  "active": "639109747dd4a281",
   "lastOpenFiles": [
+    "projects/dl/README.md",
     "literature/AI Agents/学术英语论文常见表达速查.md",
     "hermes/decisions.md",
     "hermes/hermes-core-duty.md",
@@ -207,7 +208,6 @@
     "projects/final-report/README.md",
     "_write_task.py",
     "_write_readme.py",
-    "projects/dl/README.md",
     "knowledge/coding/yolo-bakery.md",
     "knowledge/research/未命名.md",
     "欢迎.md",
