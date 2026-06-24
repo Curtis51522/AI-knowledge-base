@@ -7,8 +7,8 @@ Design and implement a multi-agent AI operations system for a medium-sized baker
 
 ---
 
-## Current Stage: Pre-Deployment Polish & Demo Preparation
-System is fully built and running locally. Next step: bring to the bakery for real-environment testing, collect owner and staff feedback, iterate based on actual operational needs.
+## Current Stage: Demo-Ready + Pre-Field Test
+System fully built, S5 code-reviewed and hardened. Paper outline written. **Demo at bakery: June 25 (tomorrow).**
 
 ---
 
@@ -40,11 +40,25 @@ System is fully built and running locally. Next step: bring to the bakery for re
 - Smart Top-3 bundle recommendations
 - AI-generated sales script for cashiers
 
-### S5 - AI Brain (Multi-Agent Engine)
+### S5 - AI Brain (Multi-Agent Engine) 🔧 2026-06-24
 - DistilBERT intent classifier (8 intents), 6 programmatic agents
 - MIP Pareto plan generation + LLM plan selection & synthesis
 - System alerts: background monitoring every 5 minutes (inventory, forecast, schedule, trends)
 - Supports English, Bahasa Malaysia, and mixed EN-BM input
+
+#### S5 Deep Review + Hardening (2026-06-24)
+- **Code review**: full call chain traced (/query → parse → classify → agents → arbitrate → synthesize)
+- **3 critical bugs fixed**:
+  | Bug | File | Fix |
+  |-----|------|-----|
+  | Arbitrator defaulted baker=1 when staffing API failed | `arbitrator.py:239` | Default→0 + confidence gate |
+  | LLM Planner's date field silently ignored | `server.py:428-430` | Now captured into params |
+  | LLM Planner's product name not validated | `server.py:431-439` | Normalize + fallback to local extraction |
+- **Intent classifier overhaul**: 85% → **98% accuracy** (54 benchmarks)
+  - Keyword list: removed overly-generic words, added Malay profit/ranking/comparison terms
+  - Cross-validation layer: DistilBERT + keyword disagreement detection with 3 trigger rules
+  - Profit-force rule: Malay "untung/rugi/keuntungan" auto-boost profit_analysis
+- **Pre-flight checks passed**: Python 3.13, 10/10 deps, MySQL (7 inventory + 1045 txn), YOLO 50MB, XGBoost 6 models, DistilBERT 256MB
 
 ### Recent UI/UX Improvements (2026-06-11)
 - Full EN/BM language toggle with ~120 translation keys
@@ -74,25 +88,33 @@ System is fully built and running locally. Next step: bring to the bakery for re
 
 ## Next Steps
 
-### Publication
-- [ ] Paper outline: [[paper-outline|LLM-MIP Decision Architecture]] — targeting IEEE Access / Applied Sciences (Q2-Q3)
+### Publication 📄
+- [x] Paper outline: [[paper-outline|LLM-MIP Decision Architecture]] — targeting IEEE Access / Applied Sciences (Q2-Q3)
+- [ ] Collect real bakery data for experimental section (Phase 1: starting tomorrow)
+- [ ] Run 4 baseline comparisons + ablation study (Phase 2: post field test)
+- [ ] Write Methodology, Related Work, Results (Phase 3)
 
-### Field Test Preparation
-- [ ] Prepare laptop/deployment environment for on-site testing
+### Field Test (Tomorrow — June 25)
+- [x] Prepare laptop/deployment environment
+- [x] S5 code hardened + intent classifier 98%
+- [x] Both servers verified running (:8001 + :8002)
 - [ ] Seed database with realistic initial inventory data
 - [ ] Bring USB camera and test YOLO at checkout counter
-- [ ] Prepare test script: inflow -> forecast -> schedule -> checkout -> AI query
+- [ ] Follow [[../DEMO_SCRIPT.md|DEMO_SCRIPT]]: login → POS → Top-3 → forecast → schedule → inventory → AI Brain → alerts
 
-### During Field Test
-- [ ] Collect 1-2 weeks of real sales data
+### During Field Test (1-2 weeks)
+- [ ] Collect real sales data daily
+- [ ] Log all S5 AI Brain decisions + owner reactions
 - [ ] Test YOLO accuracy under real lighting and tray conditions
 - [ ] Gather staff feedback on POS usability
-- [ ] Gather owner feedback on AI Brain recommendations (baking plan, promo, schedule)
+- [ ] Gather owner feedback on AI Brain recommendations
 - [ ] Log all bugs and UX friction points
 
 ### Post Field Test
 - [ ] Retrain XGBoost models on real sales data
 - [ ] Fine-tune YOLO with real bakery images if needed
+- [ ] Retrain DistilBERT intent classifier with real queries
 - [ ] Adjust S3 constraint model based on actual staffing needs
 - [ ] Iterate combo scoring weights based on owner preferences
+- [ ] Write paper experimental section with real data
 - [ ] Finalize documentation for final report submission

@@ -4,7 +4,7 @@
 
 | 项目                                             | 状态         | 优先级 | 最后更新       | 当前阶段          |
 | ---------------------------------------------- | ---------- | --- | ---------- | ------------- |
-| [[projects/final-report/README\|final-report]] | 部署前打磨 + 论文写作 | 高   | 2026-06-24 | 演示脚本 + 现场测试 + S5论文提纲 |
+| [[projects/final-report/README\|final-report]] | 🟢 演示就绪 + 论文提纲 | 高   | 2026-06-24 | S5代码审查+修复+意图98% |
 | [[projects/dl/README\|dl]]                     | 论文撰写       | 高   | 2026-06-11 | 文献综述          |
 
 ## 项目详情
@@ -19,4 +19,4 @@
   - S5：AI 大脑（DistilBERT 意图分类器、6 个智能体、MIP + DeepSeek 综合决策、支持 EN/BM/混合输入）
 - **近期 UI/UX 改进 (2026-06-11)：** EN/BM 双语切换（~120 翻译键）、午夜基准鲜度、20% 折扣下限、仅购物车组合配对、咖啡场景储蓄排序、面板竞态修复、计划选项字符修复、Day-2 残留代码清理、演示脚本
 - **已知限制：** 尚无真实销售数据、YOLO 未用真实摄像头测试、收入为零、两个服务器需手动启动、MILP 偶尔不可行、未与厨房设备集成
-- **下一步：** 带到面包店进行真实环境测试，收集店主/员工反馈，迭代改进。S5 核心贡献（MIP+LLM决策层）已撰写论文提纲 [[projects/final-report/paper-outline|paper-outline]]，目标 IEEE Access / Applied Sciences Q3+。
+- **下一步：** 明天 (6/25) 面包店现场演示。S5 核心贡献（MIP+LLM决策层）已撰写论文提纲 [[projects/final-report/paper-outline|paper-outline]]，目标 IEEE Access / Applied Sciences Q3+。意图分类器准确率 85%→98%。
