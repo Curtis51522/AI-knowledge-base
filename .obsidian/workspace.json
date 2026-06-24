@@ -187,6 +187,8 @@
   },
   "active": "639109747dd4a281",
   "lastOpenFiles": [
+    "projects/bakery-workspace/README.md",
+    "projects/bakery-workspace",
     "projects/final-report/paper-outline.md",
     "projects/dl/README.md",
     "literature/AI Agents/学术英语论文常见表达速查.md",
@@ -215,13 +217,11 @@
     "AGENTS.md",
     "rating.md",
     "literature/AI hallucination/Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena.md",
-    "literature/AI hallucination/A Multitask, Multilingual, Multimodal Evaluation of ChatGPT on Reasoning, Hallucination, and Interactivity.md",
     "literature/AI hallucination/Trusting Your Evidence Hallucinate Less with Context-aware Decoding.pdf",
     "literature/AI hallucination/SelfCheckGPT Zero-Resource Black-Box Hallucination Detection for Generative Large Language Models.pdf",
     "literature/AI hallucination/Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena.pdf",
     "literature/AI hallucination/HalluMeasure Fine-grained Hallucination Measurement Using.pdf",
     "literature/AI hallucination/G-Eval NLG Evaluation using GPT-4 with Better Human Alignment.pdf",
-    "literature/AI hallucination/Drowzee Metamorphic Testing for Fact-Conflicting Hallucination Detection in Large Language Models.pdf",
-    "literature/AI hallucination/A Multitask, Multilingual, Multimodal Evaluation of ChatGPT on Reasoning, Hallucination, and Interactivity.pdf"
+    "literature/AI hallucination/Drowzee Metamorphic Testing for Fact-Conflicting Hallucination Detection in Large Language Models.pdf"
   ]
 }
