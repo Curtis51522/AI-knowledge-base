@@ -74,6 +74,9 @@ System is fully built and running locally. Next step: bring to the bakery for re
 
 ## Next Steps
 
+### Publication
+- [ ] Paper outline: [[paper-outline|LLM-MIP Decision Architecture]] — targeting IEEE Access / Applied Sciences (Q2-Q3)
+
 ### Field Test Preparation
 - [ ] Prepare laptop/deployment environment for on-site testing
 - [ ] Seed database with realistic initial inventory data
