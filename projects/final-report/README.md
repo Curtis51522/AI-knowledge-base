@@ -15,7 +15,8 @@ System fully built, S5 code-reviewed and hardened. Paper outline written. **Demo
 ## Progress (Completed)
 
 ### S1 - Visual Recognition (YOLO)
-- YOLOv8n trained, supports 6 product detection
+- **待升级**: YOLOv8n → **YOLO11s**（更好的注意力机制，区分相似面包更准）
+- **待扩展**: 6 类 → 更多品类（需找新的烘焙数据集）
 - Checkout with FIFO inventory deduction
 - Fresh Batch Inflow for new production scanning
 - HITL (Human-in-the-Loop) correction log
@@ -31,6 +32,7 @@ System fully built, S5 code-reviewed and hardened. Paper outline written. **Demo
 - Dual-role support, sick leave auto-replacement, shift swaps
 - Past-date locking + KPI snapshot persistence
 - Employee coverage statistics & fairness metrics
+- **待实现: 员工签到系统 (PIN码打卡)** → 归入 S3 Dashboard 模块，不做在 POS 上
 
 ### S4 - POS Frontend + Combo Engine (BFF Architecture)
 - Responsive Web POS, JWT auth (Staff/Manager roles)
@@ -39,6 +41,17 @@ System fully built, S5 code-reviewed and hardened. Paper outline written. **Demo
 - EN/BM bilingual support throughout all UI
 - Smart Top-3 bundle recommendations
 - AI-generated sales script for cashiers
+- **S4 已完成优化 (2026-06-25):**
+  - ✕ 一键删除购物车行
+  - − / + 一键调整数量
+  - ⚙ Edit 改为齿轮图标，Error Type 已删除
+  - 💳 支付弹窗 (Cash/Card/QR + 找零)
+  - 🧾 小票显示 + 打印
+  - 🔄 S5 折扣加载后自动重绘 POS
+  - 🟢 产品卡片固定 20%/Top-3 走 S5 折扣路径分离
+  - 🟡 Fresh/Day-1 分开显示 + 购物车按鲜度区分
+  - ⌨️ ESC 键关弹窗
+  - 🗑️ Clear Cart 按钮
 
 ### S5 - AI Brain (Multi-Agent Engine) 🔧 2026-06-24
 - DistilBERT intent classifier (8 intents), 6 programmatic agents

@@ -1,22 +1,53 @@
-# 项目状态
+# Project Status — Bakery AI System
 
-## 活跃项目
+> Last updated: 2026-06-27 12:15
 
-| 项目                                             | 状态         | 优先级 | 最后更新       | 当前阶段          |
-| ---------------------------------------------- | ---------- | --- | ---------- | ------------- |
-| [[projects/final-report/README\|final-report]] | 🟢 演示就绪 + 论文提纲 | 高   | 2026-06-24 | S5代码审查+修复+意图98% |
-| [[projects/dl/README\|dl]]                     | 论文撰写       | 高   | 2026-06-11 | 文献综述          |
+## Current Phase
+**S1 YOLO11s Grid Search 训练中** (用户自己电脑, git-bash, 24 组 × 30 epoch, imgsz=416, batch=16/8)
 
-## 项目详情
+## Module Status
 
-### final-report —— 烘焙 AI 系统
-- **目标：** 为马来西亚吉隆坡一家中型烘焙咖啡店构建多智能体 AI 运营系统。6 种面包、6 种咖啡饮品、10 名员工、2 台烤箱、2 个收银台（主收银台面对面包 + 咖啡收银台由咖啡师兼任）。周一休息。
-- **子系统（全部完成）：**
-  - S1：YOLOv8n 视觉识别 + Fresh Batch 入库扫描 + HITL 修正日志
-  - S2：XGBoost 需求预测（7 天，含天气数据，每 30 分钟自动刷新）
-  - S3：OR-Tools CP-SAT 排班调度（双角色、病假替换、KPI 持久化、公平性指标）
-  - S4：POS 前端 + 套餐引擎（JWT 认证、五维评分、Day-1 动态折扣、Top-3 推荐、AI 销售话术、EN/BM 双语）
-  - S5：AI 大脑（DistilBERT 意图分类器、6 个智能体、MIP + DeepSeek 综合决策、支持 EN/BM/混合输入）
-- **近期 UI/UX 改进 (2026-06-11)：** EN/BM 双语切换（~120 翻译键）、午夜基准鲜度、20% 折扣下限、仅购物车组合配对、咖啡场景储蓄排序、面板竞态修复、计划选项字符修复、Day-2 残留代码清理、演示脚本
-- **已知限制：** 尚无真实销售数据、YOLO 未用真实摄像头测试、收入为零、两个服务器需手动启动、MILP 偶尔不可行、未与厨房设备集成
-- **下一步：** 明天 (6/25) 面包店现场演示。S5 核心贡献（MIP+LLM决策层）已撰写论文提纲 [[projects/final-report/paper-outline|paper-outline]]，目标 IEEE Access / Applied Sciences Q3+。意图分类器准确率 85%→98%。
+| Module | Status | Detail |
+|--------|--------|--------|
+| S1 | 🟡 训练中 | yolo11s, 28类, merged_yolo 数据集, experiments.py 正在跑 Grid Search(24组) |
+| S2 | ✅ 完成 | XGBoost 预测 6 款面包 |
+| S3 | 🟡 排班完成 | KPI 设计完成(4指标×Z-Score), 签到系统待开发 |
+| S4 | 🟡 POS持续改进 | ✅ 支付弹窗(Cash/Card/QR+找零+小票), ✅ 咖啡Hot/Iced+冰量糖量, ⚠️ BM翻译, ❌ 购物车UX(✕删/-+/Clear Cart), ❌ 折扣修复, ❌ Fresh/Day-1分开 |
+| S5 | 🟡 方向已定 | Dashboard Intelligence Engine, 6Agent并行不变, 输出管道从聊天框→Dashboard面板 |
+| DB | 🟡 schema_v2.sql 已写 | 12张新表(products/orders/order_items/attendance/raw_materials/material_transactions/employee_kpi/material_wastage_log/daily_summary/product_recipes/alert_log), 待执行到MySQL |
+| Dashboard | ✅ 4面板设计完成 | 预测(需求/产量/采购)、排班+KPI(出勤/排班/Z-Score排名)、收入(营收/利润/排行/历史)、库存(面包/烘焙材料/咖啡材料) |
+| 数据集 | ✅ 完成 | data/merged_yolo/, 28类, ~19k 图(YOLO格式), 含16核心+12菲律宾品类 |
+| 产品数据 | 🟡 16款面包 | 6老+10新, 价格+配方已写入schema_v2, 成本为估算值待真实数据 |
+| 咖啡 | 🟡 6款 | 已有热/冰+冰量糖量自定义, 配方+成本待补(中国真实数据) |
+| 语言 | 🟡 EN/BM | 暂用BM(马来语), 中文待重新实施 |
+
+## 今天已完成 (2026-06-26~27)
+
+1. S1 YOLO 数据集合并 (5个Roboflow → merged_yolo, 28类, 19k图)
+2. S1 训练脚本: experiments.py(24组Grid Search+3组消融), full_train.py(200 epoch)
+3. S1 baseline: zero-shot 消融 C
+4. S1 改写: yolo26m→yolo11s, pretrained=True, mosaic=1.0, YOLO11参数(box/cls/dfl/dropout)
+5. S4 支付弹窗: Cash/Card/QR + 找零 + 小票 + closePaymentModal/closeReceipt
+6. S4 咖啡自定义: Hot/Iced切换 + 冰量糖量Pill按钮, 变量式onclick(零转义)
+7. 4 Dashboard 设计定稿: 预测/排班/收入/库存
+8. schema_v2.sql 完善: 16款面包产品+配方, 10张新表
+9. KPI 设计: 4指标×Z-Score(出勤率/准时率/工时达标率/团队达标率)
+10. 原材料损耗: 每周盘点机制, 默认5%, 自动更新
+
+## 编辑教训
+
+- ❌ **绝不**用 patch() 编辑 index.html JS字符串 — 引号转义必损
+- ✅ 用 execute_code + bytes.replace()
+- ✅ 用变量式 onclick (_ci, _cn等) 避免嵌套引号
+- ✅ 每次改动后验证: 重启服务器 → curl ping → 刷新登录测试
+- ❌ 大批量改翻译字典 → 造成重复script块、文件损坏 → git checkout恢复 → 全部改动丢失
+
+## 下一步
+
+1. 等 S1 Grid Search 跑完 → best_config.json → full_train.py
+2. 继续 S4: 购物车UX(✕删/-+/Clear Cart), 折扣修复, Fresh/Day-1分开
+3. 重新实施中文翻译 (小心: 一个改动一验证)
+4. 执行 schema_v2.sql 到 MySQL
+5. S5 转型: 6 Agent → Dashboard JSON输出
+6. 找中国烘焙销售数据集(替换马来西亚数据)
+7. 产品真实成本数据(中国烘焙材料价格)
