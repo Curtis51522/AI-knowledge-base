@@ -422,3 +422,64 @@ tuning. This is the ONLY permitted inheritance, because:
 
 Before committing any new model script, run it and confirm the output
 contains GridSearchCV logs (e.g., "Fitting 5 folds for each of N candidates").
+
+---
+
+## Coding Rule: No Hardcoded Paths or Magic Values (MANDATORY)
+
+**Effective: 2026-07-13. Applies to ALL Python files in the project.**
+
+### Rule 1: Paths must be relative
+
+```python
+# ❌ FORBIDDEN
+DATA_DIR = r"C:\Users\Curtis\Desktop\..."
+
+# ✅ REQUIRED
+import os as _os
+BASE_DIR = _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__)))
+DATA_DIR = _os.path.join(BASE_DIR, "data")
+OUT_DIR  = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "outputs")
+```
+
+All file paths derive from `__file__`. Code must run on any machine without editing paths.
+
+### Rule 2: Dates and thresholds go in a named config block
+
+```python
+# ❌ FORBIDDEN — scattered in code
+df[df["date"] < "2023-01-01"]
+
+# ✅ REQUIRED — config block at top of file
+SPLIT_DATE   = "2023-01-01"   # train -> val
+SPLIT_DATE_2 = "2023-07-01"   # val -> test
+# ...later in code...
+df[df["date"] < SPLIT_DATE]
+```
+
+Any date string, threshold, ratio, or coefficient that could conceivably change
+must be a named constant in the configuration section (top of file, before any
+function definitions).
+
+### Rule 3: Configuration sections go at the top
+
+Every script must have a clearly marked `# ===== CONFIGURATION =====` block
+containing all tunable values before any function definitions.
+
+### Compliance checklist
+
+For every Python file, verify:
+
+- [ ] Zero absolute Windows paths (`C:\Users\...`)
+- [ ] Zero date strings in code body (only in config block)
+- [ ] All `DATA_DIR`, `OUT_DIR` etc. derived from `__file__`
+- [ ] Config section at top with clear comments
+- [ ] File runs without edits on a fresh checkout
+
+### Files already compliant (2026-07-13)
+
+- `s2_forecasting/preprocess.py`
+- `s2_forecasting/train_xgboost.py`
+- `s2_forecasting/train_classifier.py`
+- `s2_forecasting/train_quantile.py`
+- `scripts/generate_raw_sales.py`
