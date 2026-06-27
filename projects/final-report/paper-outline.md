@@ -1,11 +1,10 @@
-# Paper Outline: S5 AI Brain — LLM-Mediated Multi-Objective Optimization
+﻿# Paper Outline: S5 AI Brain — LLM-Mediated Multi-Objective Optimization
 
-> Status: drafting (Phase 0 complete: code hardened, classifier 98%) | Target: IEEE Access / Applied Sciences | Updated: 2026-06-24
+> Status: drafting | Target: IEEE Access / Applied Sciences | Updated: 2026-07-13
 
 ---
 
 ## 候选标题
-
 1. **Safe LLM-Mediated Decision Making for Multi-Objective Production Optimization: A Bakery Operations Case Study**
 2. **Pareto-Constrained LLM Selection for Small Business Operations Planning**
 3. **Bridging MIP and LLMs: A Dominance-Filtered Decision Architecture for Bakery Production Scheduling**
@@ -29,8 +28,9 @@ production plans, (2) a programmatic dominance filter eliminates strictly inferi
 candidates, (3) an LLM selects and explains the best plan with contextual constraints. 
 The LLM is safety-constrained: it can only SELECT, never CREATE.
 
-实验：Deployed in a real bakery-cafe in Kuala Lumpur over N days. Compared against 
-rule-based baselines and LLM-only approaches. Ablated each layer.
+实验：Evaluated on a simulated bakery-cafe in Guangzhou, China with 30 bread products 
++ 15 drinks over N days. Compared against rule-based baselines and LLM-only approaches. 
+Ablated each layer.
 
 结果：S5 reduced waste by X%, improved profit by X%, with 100% constraint satisfaction 
 (vs LLM-only at Y%). Owner satisfaction score: Z/5.
@@ -44,8 +44,8 @@ operational accessibility for small businesses.
 ## 1. Introduction
 
 ### 1.1 Problem Background
-- Small retail businesses (bakeries, cafes, convenience stores) face daily multi-objective decisions
-- 6 products × 2 freshness levels × demand uncertainty × staffing constraints = NP-hard
+- Small retail businesses face daily multi-objective decisions
+- 30 bread products × 2 freshness levels × demand uncertainty × staffing constraints = NP-hard
 - Existing tools: spreadsheets (error-prone), OR consultants (unaffordable)
 
 ### 1.2 Research Gap
@@ -56,7 +56,7 @@ operational accessibility for small businesses.
 ### 1.3 Contributions (3点)
 1. **Architecture**: Three-layer MIP→Dominance→LLM decision pipeline with provable safety (LLM can only SELECT from MIP-validated plans)
 2. **Dominance Filter**: Pre-LLM elimination of strictly Pareto-dominated plans, reducing decision space and suppressing hallucination
-3. **Real-world validation**: N-day deployment in operational bakery, quantitative comparison against 3 baselines
+3. **Validation**: N-day simulation on 45-product bakery in Guangzhou, quantitative comparison against 3 baselines
 
 ---
 
@@ -85,7 +85,7 @@ operational accessibility for small businesses.
 ### 3.1 System Architecture
 
 ```
-User Query (EN/BM)
+User Query (EN/CN)
      │
      ▼
 DistilBERT Intent Classifier (8 intents)
@@ -94,62 +94,65 @@ DistilBERT Intent Classifier (8 intents)
 6 Parallel Agents (Demand, Inventory, Production, Staffing, Promo, Profit)
      │
      ▼
-┌─────────────────────────────────────────────┐
-│ LAYER 1: MIP Optimization                   │
-│   maximize Σ(rev_i - cost_i - waste_i -     │
-│              stockout_i)                     │
-│   s.t.  Σ bake_i ≤ capacity                 │
-│         flow_i + sales_i = demand_i          │
-│         bake_i ∈ Z⁺ (integer batch)         │
-│   Output: 4 Pareto-optimal plans            │
-│     A_aggressive / B_balanced /             │
-│     C_conservative / D_baseline             │
-├─────────────────────────────────────────────┤
-│ LAYER 2: Dominance Filter (程序化安全层)     │
-│   For all (i,j): if profit_i > profit_j     │
-│   AND waste_i ≤ waste_j                     │
-│   AND shortage_i ≤ shortage_j               │
-│   → eliminate plan_j (strictly dominated)   │
-├─────────────────────────────────────────────┤
-│ LAYER 3: LLM Decision (约束推理层)           │
-│   Input: non-dominated plans + context      │
-│   Prompt: structured decision rules         │
-│   Safety: LLM can only SELECT from plans    │
-│   Output: chosen plan + natural language    │
-│   explanation + counterfactual analysis     │
-└─────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────┐
+│ LAYER 1: MIP Optimization                       │
+│   maximize sum(rev_i - cost_i - waste_i -       │
+│                stockout_i)                      │
+│   s.t.   sum bake_i <= capacity                 │
+│          flow_i + sales_i = demand_i            │
+│          bake_i in Z+ (integer batch)           │
+│   Output: 4 Pareto-optimal plans                │
+│     A_aggressive / B_balanced /                 │
+│     C_conservative / D_baseline                 │
+├─────────────────────────────────────────────────┤
+│ LAYER 2: Dominance Filter                       │
+│   if profit_A > profit_B                        │
+│   and waste_A <= waste_B                        │
+│   and shortage_A <= shortage_B:                 │
+│       eliminate B                               │
+│   Output: true Pareto-optimal subset            │
+├─────────────────────────────────────────────────┤
+│ LAYER 3: LLM Decision Protocol                  │
+│   Structured prompt with hierarchical rules     │
+│   Rule: Dominance > Profit > Context            │
+│   Output: PLAN=X|CONFLICT=Y/N|REASON=...        │
+│   Safety: selected plan MUST exist in filtered  │
+│           set (LLM can only SELECT)             │
+└─────────────────────────────────────────────────┘
 ```
 
-### 3.2 MIP Formulation (可以放到正文)
+### 3.2 MIP Formulation
 
 ```
-Indices: i ∈ {1..6} products
+Indices: i in {1..30} products (+ 15 drinks handled separately)
 Variables: b_i (bake), w_i (waste), s_i (shortage)
-Parameters: d_i (demand), f_i (fresh stock), day1_i, cap, price_i
+Parameters: d_i (demand from S2 quantile model), f_i (fresh stock), 
+            day1_i, cap, price_i
 
 Objective:
-  max Σ [price_i × min(b_i+f_i+day1_i, d_i) 
-         - prod_cost × b_i 
-         - waste_cost × w_i 
-         - stockout_cost × s_i]
+  max sum [price_i * min(b_i+f_i+day1_i, d_i) 
+         - prod_cost * b_i 
+         - waste_cost * w_i 
+         - stockout_cost * s_i]
 
 Constraints:
-  Σ b_i ≤ cap                          (capacity)
-  b_i + f_i + day1_i + s_i = d_i + w_i (flow balance)
-  b_i ≥ 0, integer                      (batch constraint)
+  sum b_i <= cap                          (capacity)
+  b_i + f_i + day1_i + s_i = d_i + w_i   (flow balance)
+  b_i >= 0, integer                       (batch constraint)
 
-Pareto frontier: 4 risk-preference points α ∈ {0, 0.25, 0.5, 1.0}
-  d_i(α) = d_low + α × (d_high - d_low)
+Pareto frontier: 4 risk-preference points alpha in {0, 0.25, 0.5, 1.0}
+  d_i(alpha) = d_low + alpha * (d_high - d_low)
+  where d_low = S2 Q10, d_high = S2 Q90
 ```
 
 ### 3.3 Dominance Filter Algorithm
 ```
 def dominance_filter(plans):
-    dominated = ∅
+    dominated = set()
     for each (A, B) in plans:
         if profit_A > profit_B 
-        and waste_A ≤ waste_B 
-        and shortage_A ≤ shortage_B:
+        and waste_A <= waste_B 
+        and shortage_A <= shortage_B:
             dominated.add(B)
     return plans \ dominated
 ```
@@ -166,18 +169,19 @@ def dominance_filter(plans):
 ## 4. Experimental Design
 
 ### 4.1 Deployment Context
-- Bakery-cafe in Kuala Lumpur, Malaysia
-- 6 bakery products + 6 coffee drinks
-- 10 employees, 2 ovens, daily capacity ~720 units
-- N-day deployment (建议 ≥14 天)
+- Simulated bakery-cafe in Guangzhou, China
+- 30 bakery products + 15 drinks
+- Sales data: 3-year synthetic dataset (2021-2023) based on French Bakery distribution
+- Daily capacity ~720 units (breads)
+- S2 quantile model provides demand intervals (Q10/Q50/Q90) as MIP input
 
 ### 4.2 Baselines
 | 方案 | MIP | Dominance | LLM | 说明 |
 |------|-----|-----------|-----|------|
-| **S5-Full** | ✓ | ✓ | ✓ | 完整系统 |
-| **S5-NoDominance** | ✓ | ✗ | ✓ | LLM从4方案选择（无安全过滤） |
-| **S5-RuleBased** | ✓ | ✓ | ✗ | 总是选B_balanced |
-| **LLM-Only** | ✗ | ✗ | ✓ | 纯LLM建议（无MIP约束） |
+| **S5-Full** | ✅ | ✅ | ✅ | 完整系统 |
+| **S5-NoDominance** | ✅ | ❌ | ✅ | LLM从原方案选择（无安全过滤）|
+| **S5-RuleBased** | ✅ | ✅ | ❌ | 总是选 B_balanced |
+| **LLM-Only** | ❌ | ❌ | ✅ | 纯 LLM 建议（无 MIP 约束）|
 
 ### 4.3 Metrics
 | 指标 | 定义 | 来源 |
@@ -186,13 +190,13 @@ def dominance_filter(plans):
 | Waste Reduction % | (实际浪费 - 基线浪费) / 基线浪费 | S1 inventory |
 | Profit Improvement % | (实际利润 - 基线利润) / 基线利润 | S4 sales |
 | Decision Latency (ms) | 端到端响应时间 | S5 elapsed_ms |
-| Owner Trust Score | 1-5 Likert scale 主观评分 | 面访 |
+| Owner Trust Score | 1-5 Likert 主观评分 | 问卷 |
 
 ### 4.4 Ablation Study
 1. Remove Dominance Filter → LLM sees 4 plans instead of filtered set
 2. Remove Cross-Agent Data → agents run independently without re-run
 3. Remove LLM Decision → always select B_balanced
-4. Vary demand uncertainty α → sensitivity analysis
+4. Vary demand uncertainty alpha → sensitivity analysis across S2 quantile intervals
 
 ---
 
@@ -212,7 +216,7 @@ def dominance_filter(plans):
 1. Why constraint satisfaction matters for small business — one wrong recommendation = real money lost
 2. Dominance filter as "free safety" — eliminates bad plans before LLM sees them
 3. Generalizability — architecture applies to any perishable-inventory small retail
-4. Limitations: single-bakery case study, synthetic pretraining data, 6-product scale
+4. Limitations: single-bakery simulation, synthetic sales data, 45-product scale
 
 ---
 
@@ -230,12 +234,12 @@ def dominance_filter(plans):
 
 ## 8. 待办清单
 
-### Phase 1: 数据收集（明天开始）
-- [ ] 面包店测试中记录所有 S5 决策日志
+### Phase 1: 数据收集
+- [ ] 运行完整 S1-S5 pipeline 收集决策日志
 - [ ] 每天导出 sales / waste / profit 数据
-- [ ] 收集店主反馈（1-5分 + 自由评论）
+- [ ] 收集团队反馈（1-5分 + 自由评论）
 
-### Phase 2: 实验（测试后1周内）
+### Phase 2: 实验
 - [ ] 跑 4 组 baseline 对比（用收集到的需求数据回放）
 - [ ] 消融实验 4 组
 - [ ] 绘制对比图表
@@ -246,3 +250,21 @@ def dominance_filter(plans):
 - [ ] Introduction + Abstract
 - [ ] Results + Discussion
 - [ ] 格式化（IEEE Access 模板）
+
+---
+
+## 9. S2 与 S5 的关系
+
+S2（预测模块）输出分位数需求区间 → S5（LLM 决策模块）作为 MIP 的需求参数。
+
+```
+S2 分位数模型                 S5 MIP 优化
+─────────────                ──────────
+Q10 d_low  ──────────────→  d_i(alpha=0)    = baseline 需求
+Q50        ──────────────→  d_i(alpha=0.25) = 保守需求
+Q90 d_high ──────────────→  d_i(alpha=1.0)  = 激进需求
+```
+
+两篇论文的关系：
+- **Paper A (S1+S2)**: 视觉识别 + 销售预测 → 投计算机视觉/预测类期刊
+- **Paper B (S3+S5)**: MIP 调度 + LLM 决策 → 投 AI/OR 交叉期刊（本文档）

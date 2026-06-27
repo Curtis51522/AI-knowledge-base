@@ -364,3 +364,61 @@ python main.py
 ```
 
 Default login: `manager` / `hash123`
+
+
+---
+
+## Coding Rule: Independent Hyperparameter Tuning (MANDATORY)
+
+**Effective: 2026-07-13. Applies to ALL model training scripts in s2_forecasting/.**
+
+### Rule
+
+Every model MUST undergo independent GridSearchCV (or equivalent) hyperparameter
+tuning. Inheriting hyperparameters from another model is FORBIDDEN -- even if the
+models share the same base architecture (e.g., both use XGBoost).
+
+### Rationale
+
+Different loss functions have different loss surfaces. Hyperparameters optimal
+for one objective are NOT necessarily optimal for another.
+
+Evidence from this project:
+
+| Model | Objective | Best max_depth | Best subsample | Best colsample_bytree |
+|-------|-----------|---------------|----------------|----------------------|
+| Regression | reg:squarederror | 3 | 0.8 | 0.8 |
+| Classifier | binary:logistic | 3 | 1.0 | 0.8 |
+| Quantile (Q50) | reg:quantileerror | **7** | **1.0** | **1.0** |
+
+If quantile had inherited regression params, it would have used max_depth=3
+instead of the optimal max_depth=7 -- significantly degrading interval quality.
+
+### Compliance Checklist
+
+For every new model script, verify:
+
+- [ ] `PARAM_GRID` or equivalent is defined with at least 3 values per
+      structural param (n_estimators, max_depth, learning_rate)
+- [ ] `GridSearchCV` (or `RandomizedSearchCV` with n_iter >= 50) is called
+- [ ] CV folds >= 5
+- [ ] `scoring` metric matches the model objective
+- [ ] Best params are saved to `outputs/<model>_best_params.json`
+- [ ] Best params are logged with `print_metrics()` or equivalent
+- [ ] No `**shared_params` from another model unless the docstring explicitly
+      justifies why (e.g., "Q10/Q90 inherit Q50 structural params because
+      tree architecture is quantile-agnostic; only quantile_alpha differs")
+
+### Exception
+
+Quantile models Q10 and Q90 may inherit structural hyperparameters from Q50
+tuning. This is the ONLY permitted inheritance, because:
+- max_depth, subsample, colsample_bytree, reg_alpha, reg_lambda are
+  quantile-agnostic (they control tree structure, not quantile targeting)
+- Only `quantile_alpha` differs across the three models
+- Tuning all three independently would 3x the compute with negligible benefit
+
+### Enforcement
+
+Before committing any new model script, run it and confirm the output
+contains GridSearchCV logs (e.g., "Fitting 5 folds for each of N candidates").

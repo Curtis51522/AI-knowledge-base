@@ -183,6 +183,7 @@
   },
   "active": "639109747dd4a281",
   "lastOpenFiles": [
+    "projects/final-report/S2-status.md",
     "projects/final-report/reference-chain.md",
     "projects/final-report/product-list-30.md",
     "projects/final-report/code-analysis.md",
@@ -212,7 +213,6 @@
     "_write_readme.py",
     "knowledge/coding/yolo-bakery.md",
     "knowledge/research/未命名.md",
-    "欢迎.md",
     "literature/AI hallucination/Trusting Your Evidence Hallucinate Less with Context-aware Decoding.pdf",
     "literature/AI hallucination/SelfCheckGPT Zero-Resource Black-Box Hallucination Detection for Generative Large Language Models.pdf",
     "literature/AI hallucination/Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena.pdf",
