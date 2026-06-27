@@ -483,3 +483,42 @@ For every Python file, verify:
 - `s2_forecasting/train_classifier.py`
 - `s2_forecasting/train_quantile.py`
 - `scripts/generate_raw_sales.py`
+
+## Coding Rule: Requirement-Driven Development (MANDATORY)
+
+**Effective: 2026-06-27. Applies to ALL code written in this project.**
+
+### Rule
+
+Before writing any code, cross-reference the requirements from:
+1. **Obsidian knowledge base** (highest priority) — D:\Obsidian-knowledgebase\AI-knowledge-base\projects\final-report\
+2. **Conversation context** — previous decisions, confirmed designs, user preferences
+3. **Existing code** (lowest priority) — only to understand current implementation
+
+Code must satisfy the written requirements exactly. Do not guess or improvise
+when requirements exist.
+
+### Priority Order (user-specified)
+
+`
+Obsidian documents  >  conversation history  >  code inspection
+`
+
+If Obsidian and conversation conflict, Obsidian wins. If neither covers the
+question, ask the user rather than assuming.
+
+### Compliance Checklist
+
+Before writing any code:
+
+- [ ] Read relevant Obsidian .md files for the module being built
+- [ ] Verify against conversation-confirmed designs (e.g., dashboard layouts)
+- [ ] Every feature/field/output matches a documented requirement
+- [ ] No extra features beyond what requirements specify
+- [ ] Output format matches documented dashboard designs
+
+### Enforcement
+
+When a module is said to be "complete," it must pass: run the module, compare
+output against documented expected output. Missing fields or extra fields are
+both failures.
