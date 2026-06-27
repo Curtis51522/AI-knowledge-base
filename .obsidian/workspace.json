@@ -183,6 +183,7 @@
   },
   "active": "639109747dd4a281",
   "lastOpenFiles": [
+    "projects/final-report/code-analysis.md",
     "literature/AI Agents/Transformer - Attention Is All You Need.md",
     "literature/AI Agents/学术英语论文常见表达速查.md",
     "projects/dl/README.md",
@@ -212,7 +213,6 @@
     "欢迎.md",
     "AGENTS.md",
     "rating.md",
-    "literature/AI hallucination/Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena.md",
     "literature/AI hallucination/Trusting Your Evidence Hallucinate Less with Context-aware Decoding.pdf",
     "literature/AI hallucination/SelfCheckGPT Zero-Resource Black-Box Hallucination Detection for Generative Large Language Models.pdf",
     "literature/AI hallucination/Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena.pdf",
